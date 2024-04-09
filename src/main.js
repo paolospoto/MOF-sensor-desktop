@@ -5,6 +5,26 @@ const led = new Gpio(2, "out");
 const { spawn } = require("child_process");
 const { exec } = require("child_process");
 
+let counter = 1;
+
+const runPythonScript = () => {
+  led.writeSync(1);
+  setTimeout(() => {
+    const python = spawn("python", ["../script.py", counter]);
+
+    if (counter === 4) {
+      mainWindow.webContents.send("python-output", "TBD");
+      counter = 1;
+    } else {
+      process.stdout.on("data", (data) => {
+        mainWindow.webContents.send("python-output", data.toString());
+      });
+      counter++;
+    }
+    led.writeSync(0);
+  }, 2000);
+};
+
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
