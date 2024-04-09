@@ -45,6 +45,7 @@
     "@mantine/hooks": "^7.6.2",
     "@tabler/icons-react": "^3.1.0",
     "electron-squirrel-startup": "^1.0.0",
+    "onoff": "1.1.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recharts": "2"
